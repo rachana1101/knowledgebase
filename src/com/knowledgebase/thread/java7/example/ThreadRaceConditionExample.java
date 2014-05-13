@@ -1,4 +1,4 @@
-package com.knowledgebase.thread;
+package com.knowledgebase.thread.java7.example;
 
 /**
  * This problem demostrates how to write the race condition 

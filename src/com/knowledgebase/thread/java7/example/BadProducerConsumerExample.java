@@ -1,4 +1,4 @@
-package com.knowledgebase.thread;
+package com.knowledgebase.thread.java7.example;
 /**
  * This example demonstrated the classic problem  
  * {@link Producer} and {@link Consumer}, where methods 

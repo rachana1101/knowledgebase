@@ -1,4 +1,4 @@
-package com.knowledgebase.thread;
+package com.knowledgebase.thread.java7.example;
 /**
  * This class demonstrates how to use simple thread
  * using {@link Runnable} interface.

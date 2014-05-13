@@ -1,4 +1,4 @@
-package com.knowledgebase.thread;
+package com.knowledgebase.thread.java7.example;
 /**
  * This class demostrates how we can fix the race condition of 
  * {@link ThreadRaceConditionExample} by using synchronized keyword
