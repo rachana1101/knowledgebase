@@ -1,0 +1,32 @@
+1) You have a stream of integers in ascending order and they keep coming Ð how would you find if a particular integer is in this array.
+
+2) Given a singly linked list which may or may not contain loop and loop may or may not start from the head node. Count the number of elements in the linked list.
+
+3) Given a character array as input. Array contains only three types of characters 'R', 'G' and 'B'. Sort the array such that all 'R's comes before 'G's and all 'G's comes before 'B's.
+
+Constraint :- No extra space allowed(except O(1) space like variables) and minimize the time complexity.
+You can only traverse the array once.
+
+4) Swap kth node from start with kth node from end in a linked list
+
+    Given a singly link list and a number 'K', swap the Kth node from the start with the Kth node from the last. Check all the edge cases.
+
+    Sample Input: 1->2->3->4->5->6->7->8 and K = 3
+    Sample Output : 1->2->6->4->5->3->7->8
+
+    Sample Input: 1->2->3->4->5->6->7->8 and K = 10
+    Sample Output: print error "LIST IS OF LESSER SIZE".
+    
+5) Find longest increasing seequence
+
+    Given an array of integers, find the longest increasing sequence .
+
+    e.g: 10,5,21,11,12,15
+
+    here 11,12,15 is the longest increasing sequence.    
+    
+6)Given Numerator and Denominator. After division you might get a recurring decimal points float as the answer. You need to identify the recurring part?
+For example 23.34563456 ...
+return 3456    
+
+
