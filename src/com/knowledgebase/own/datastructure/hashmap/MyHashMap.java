@@ -8,8 +8,7 @@ import java.util.List;
 /**
  * This is the homegrown implementation of hashmap
  * 
- * Works for normal condition 
- * 2 problem : Index collision and HashCode collision
+ * Works for normal condition 2 problem : Index collision and HashCode collision
  * TODO : FB and Ea will collision, add code for collision
  * 
  * @author rachana
@@ -21,42 +20,46 @@ public class MyHashMap<K, V> {
     private static final int SIZE = 16;
 
     Object[] entries = new Object[SIZE];
+
     @SuppressWarnings("unchecked")
     public void put(K key, V value) {
-        System.out.println(" key hashcode "+key.hashCode());
-        int index = getIndex(key.hashCode());
+//        System.out.println(" key hashcode " + key.hashCode());
+        int index = h(key.hashCode());
         if (entries[index] == null) { // if there is no value, add it to the
                                       // entry
-            Entry<K, V> newEntry = new Entry<K, V>(key, value);
-            entries[index] = newEntry;
+            List<Entry<K, V>> bucket = new ArrayList<Entry<K, V>>();
+            bucket.add(new Entry<K, V>(key, value));
+            entries[index] = bucket; // override the old one
         } else {
-            Entry<K, V> entry = (Entry<K, V>) entries[index];
-            if (key.hashCode() == entry.getKey().hashCode()
-                    && key.equals(entry.getKey())) { // duplicate
-                entry.setValue(value); // if duplicate key than override the
-                                       // value
-                entries[index] = entry; // override the old one
-            } else if (key.hashCode() == entry.getKey().hashCode()
-                    && !key.equals(entry.getKey())){
-                // collision
-                List<Entry<K,V>> bucket = new ArrayList<Entry<K,V>>();
-                bucket.add(new Entry<K, V>(key, value));
-                entries[index] = bucket; // override the old one
+            //fetch the bucket 
+            List<Entry<K, V>> bucket = (List<Entry<K, V>>) entries[index];
+            for(Entry<K,V> entry : bucket) {
+                if (key.equals(entry.getKey())) { // duplicate
+                    entry.setValue(value); // if duplicate key than override the
+                                           // value
+                    entries[index] = entry; // override the old one
+                    return;
+                }  
             }
+            bucket.add(new Entry<K, V>(key, value));
+            entries[index] = bucket;
         }
     }
 
     @SuppressWarnings("unchecked")
     public V get(K key) {
-        if(entries[getIndex(key.hashCode())].getClass().isAssignableFrom(Entry.class)) {
-            Entry<K, V> entry = ((Entry<K, V>) entries[getIndex(key.hashCode())]);
+        if (entries[h(key.hashCode())].getClass().isAssignableFrom(
+                Entry.class)) {
+            Entry<K, V> entry = ((Entry<K, V>) entries[h(key.hashCode())]);
             return (V) entry.getValue();
-        } else if(entries[getIndex(key.hashCode())].getClass().isAssignableFrom(List.class)) {
-            List<Entry<K,V>> bucket = (List<Entry<K, V>>) entries[getIndex(key.hashCode())];
+        } else if (entries[h(key.hashCode())].getClass()
+                .isAssignableFrom(ArrayList.class)) {
+            List<Entry<K, V>> bucket = (List<Entry<K, V>>) entries[h(key
+                    .hashCode())];
             Iterator<Entry<K, V>> itr = bucket.iterator();
-            while(itr.hasNext()) {
-                Entry<K,V> entry = (Entry<K, V>) itr.next();
-                if(entry.getKey().equals(key)) {
+            while (itr.hasNext()) {
+                Entry<K, V> entry = (Entry<K, V>) itr.next();
+                if (entry.getKey().equals(key)) {
                     return (V) entry.getValue();
                 }
             }
@@ -68,6 +71,13 @@ public class MyHashMap<K, V> {
         int index = hash & SIZE - 1; // we are using & operator to get
         // the index in range of size
         return index;
+    }
+
+    static final int M = 11; // a prime
+
+    public static int h(int x) {
+        //return Math.abs(x) % M;
+        return x & 0x7fffffff % SIZE-1 ;
     }
 
     /*
@@ -104,7 +114,6 @@ public class MyHashMap<K, V> {
 
         System.out.println(hashMap.get("FB"));
         System.out.println(hashMap.get("Ea"));
-
     }
 
 }

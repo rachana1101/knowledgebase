@@ -1,4 +1,4 @@
-package com.knowledgebase.thread.java7.example.Executor;
+package com.knowledgebase.thread.java7.example.executor;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
